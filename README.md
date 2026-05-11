@@ -9,7 +9,7 @@ This project is designed to simulate real-world backend engineering patterns use
 # Tech Stack
 
 ## Backend
-- Java 21
+- Java 17
 - Spring Boot
 - Spring Cloud
 - Spring Data JPA
