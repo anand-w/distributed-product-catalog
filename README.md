@@ -41,7 +41,7 @@ This project intentionally starts with a minimal architecture and evolves increm
 # Project Structure
 
 ```text
-distributed-catalog/
+distributed-product-catalog/
 │
 ├── catalog-service/
 │   ├── src/
@@ -105,7 +105,7 @@ The architecture is intentionally simple to prioritize:
 
 ```bash
 git clone <repository-url>
-cd distributed-catalog
+cd distributed-product-catalog
 ```
 
 ---
