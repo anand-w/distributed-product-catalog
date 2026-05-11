@@ -1,8 +1,18 @@
-# Distributed Product Catalog System
+# Distributed Catalog
 
-A scalable microservices-based product catalog platform built using Java, Spring Boot, PostgreSQL, Redis, Kafka, Docker, and Kubernetes.
+A production-oriented backend project focused on building a scalable and extensible distributed product catalog system using Java and Spring Boot.
 
-This project is designed to simulate real-world backend engineering patterns used in large-scale e-commerce systems like Amazon, Flipkart, and Walmart.
+The goal of this project is to learn and implement real-world backend engineering concepts such as:
+- REST APIs
+- modular service architecture
+- database design
+- bulk data ingestion
+- containerized development
+- event-driven systems
+- observability
+- distributed systems fundamentals
+
+This project intentionally starts with a minimal architecture and evolves incrementally into a more distributed system over time.
 
 ---
 
@@ -11,273 +21,139 @@ This project is designed to simulate real-world backend engineering patterns use
 ## Backend
 - Java 17
 - Spring Boot
-- Spring Cloud
 - Spring Data JPA
-- Hibernate
-- Spring Security
-- JWT Authentication
-
-## Databases & Storage
 - PostgreSQL
-- Redis
-- Elasticsearch (planned)
+- Maven
 
-## Messaging & Async Processing
-- Apache Kafka
-
-## DevOps & Infrastructure
+## Infrastructure
 - Docker
 - Docker Compose
-- Kubernetes (planned)
-- GitHub Actions (planned)
 
-## Monitoring & Observability
-- Spring Boot Actuator
-- Prometheus (planned)
-- Grafana (planned)
-- Distributed Tracing (planned)
-
----
-
-# System Architecture
-
-The system follows a microservices architecture where each service owns its domain and database responsibilities.
-
-## Planned Services
-
-| Service | Responsibility |
-|---|---|
-| API Gateway | Central entry point for all requests |
-| Auth Service | Authentication & authorization |
-| Product Service | Product catalog management |
-| Inventory Service | Stock management |
-| Search Service | Full-text product search |
-| Notification Service | Async notifications & events |
+## Future Additions
+- Kafka
+- Redis
+- Elasticsearch / OpenSearch
+- Kubernetes
+- Prometheus + Grafana
 
 ---
 
 # Project Structure
 
 ```text
-distributed-product-catalog/
+distributed-catalog/
 │
-├── services/
-│   ├── api-gateway/
-│   ├── auth-service/
-│   ├── product-service/
-│   ├── inventory-service/
-│   ├── search-service/
-│   └── notification-service/
-│
-├── shared/
-│   ├── common-lib/
-│   ├── logging-lib/
-│   └── security-lib/
+├── catalog-service/
+│   ├── src/
+│   ├── Dockerfile
+│   └── pom.xml
 │
 ├── infra/
-│   ├── docker/
-│   ├── k8s/
-│   ├── monitoring/
-│   └── scripts/
+│   ├── docker-compose.yml
+│   └── postgres/
 │
 ├── docs/
-│   ├── architecture/
-│   ├── diagrams/
-│   └── api-specs/
 │
-├── .github/
-│   └── workflows/
-│
-├── docker-compose.yml
+├── .gitignore
 ├── README.md
-└── .gitignore
+└── pom.xml
 ```
 
 ---
 
-# Current Status
+# Current Scope (Phase 1)
 
-## Phase 1 — Core Backend
-- [ ] Product CRUD APIs
-- [ ] PostgreSQL integration
-- [ ] Validation & exception handling
-- [ ] Dockerized local setup
-- [ ] Swagger/OpenAPI documentation
+The initial phase focuses on building a strong backend foundation with:
+- product management APIs
+- PostgreSQL integration
+- Dockerized local setup
+- clean service structure
+- bulk product ingestion support
+- structured logging
+- health check endpoints
 
-## Phase 2 — Distributed Systems
-- [ ] API Gateway
-- [ ] Inter-service communication
-- [ ] Redis caching
-- [ ] JWT authentication
-- [ ] Inventory microservice
+The architecture is intentionally simple to prioritize:
+- maintainability
+- iterative development
+- clean fundamentals
+- production-style organization
 
-## Phase 3 — Event-Driven Architecture
-- [ ] Kafka integration
-- [ ] Async event processing
-- [ ] Notification service
-- [ ] Distributed transactions
-- [ ] Outbox pattern
+---
 
-## Phase 4 — Production Engineering
-- [ ] Kubernetes deployment
-- [ ] CI/CD pipelines
-- [ ] Observability stack
-- [ ] Distributed tracing
-- [ ] Load testing
+# Planned Evolution
+
+## Phase 2
+- Kafka integration
+- asynchronous ingestion pipeline
+- event-driven communication
+
+## Phase 3
+- search indexing service
+- Redis caching
+- performance optimization
+
+## Phase 4
+- observability stack
+- metrics and tracing
+- Kubernetes deployment
 
 ---
 
 # Getting Started
 
-## Prerequisites
-
-Make sure the following are installed:
-
-- Java 21
-- Docker
-- Docker Compose
-- Git
-
----
-
-# Local Development Setup
-
 ## Clone Repository
 
 ```bash
-git clone <your-repo-url>
-cd distributed-product-catalog
+git clone <repository-url>
+cd distributed-catalog
 ```
 
 ---
 
-## Start Infrastructure
+# Start Infrastructure
 
 ```bash
-docker compose up -d
+docker compose -f infra/docker-compose.yml up -d
 ```
 
-This will start:
+This starts:
 - PostgreSQL
-- Redis
+- supporting local infrastructure
 
 ---
 
-## Run Product Service
+# Run Catalog Service
 
 ```bash
-cd services/product-service
-./gradlew bootRun
+cd catalog-service
+mvn spring-boot:run
 ```
 
 ---
 
-# Docker Setup
-
-## Start Services
-
-```bash
-docker compose up -d
-```
-
-## Stop Services
-
-```bash
-docker compose down
-```
-
----
-
-# Git Workflow
-
-## Branching Strategy
+# API Base URL
 
 ```text
-main
-develop
-feature/*
-```
-
-## Example Feature Branch
-
-```bash
-git checkout -b feature/product-crud
+http://localhost:8080
 ```
 
 ---
 
-# Commit Convention
+# Development Goals
 
-```text
-feat: add product entity
-fix: handle invalid price validation
-refactor: extract mapper logic
-docs: update architecture diagram
-```
+This project is designed to simulate engineering patterns commonly used in large-scale commerce and marketplace systems.
 
----
-
-# API Design Principles
-
-- RESTful APIs
-- DTO-based communication
-- Centralized exception handling
-- Validation-first design
-- Idempotent operations
-- Clean layered architecture
+Key learning areas include:
+- scalable backend design
+- modular architecture
+- schema design
+- asynchronous processing
+- service decomposition
+- infrastructure management
+- production readiness
 
 ---
 
-# Engineering Goals
+# Status
 
-This project is focused on learning and implementing:
-
-- Microservices architecture
-- Event-driven systems
-- Distributed system fundamentals
-- Backend scalability patterns
-- Production-grade DevOps
-- Clean code & maintainability
-- Observability & monitoring
-- System design concepts
-
----
-
-# Planned Advanced Features
-
-- Rate limiting
-- Circuit breakers
-- Service discovery
-- Distributed tracing
-- Search indexing
-- CQRS patterns
-- Saga orchestration
-- API versioning
-- Role-based access control
-
----
-
-# Learning Objectives
-
-By building this project from scratch, the goal is to gain hands-on experience with:
-
-- Enterprise Java development
-- Spring ecosystem
-- Distributed systems
-- Database design
-- Docker & Kubernetes
-- Event-driven architecture
-- Backend scalability
-- Production engineering practices
-
----
-
-# Author
-
-Anand Patel
-
----
-
-# License
-
-MIT License
+🚧 Currently in active development — Phase 1 foundation setup.
