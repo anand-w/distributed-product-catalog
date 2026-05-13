@@ -8,53 +8,45 @@ import com.catalog.catalogService.model.entity.Brand;
 import com.catalog.catalogService.model.entity.Product;
 import com.catalog.catalogService.repository.BrandRepository;
 import com.catalog.catalogService.repository.ProductRepository;
+import java.util.List;
+import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
-import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
 public class ProductServiceImpl implements ProductService {
 
-    @Autowired
-    private ProductRepository productRepository;
+  @Autowired private ProductRepository productRepository;
 
+  @Autowired private BrandRepository brandRepository;
 
-    @Autowired
-    private BrandRepository brandRepository;
+  @Override
+  public ProductResponseDto save(ProductRequestDto productRequestDto) {
 
+    Optional<Brand> brand = Optional.of(new Brand());
+    brand = brandRepository.findById(productRequestDto.getBrandId());
 
-    @Override
-    public ProductResponseDto save(ProductRequestDto productRequestDto) {
+    Product product = ProductMapper.toEntity(productRequestDto, brand.get());
+    Product savedProduct = productRepository.save(product);
 
-        Optional<Brand> brand= Optional.of(new Brand());
-        brand=brandRepository.findById(productRequestDto.getBrandId());
+    return ProductMapper.toResponseDto(savedProduct);
+  }
 
-        Product product = ProductMapper.toEntity(productRequestDto,brand.get());
-        Product  savedProduct = productRepository.save(product);
+  public List<ProductResponseDto> getAll() {
+    List<Product> productsList = productRepository.findAll();
+    return productsList.stream().map(ProductMapper::toResponseDto).toList();
+  }
 
-        return ProductMapper.toResponseDto(savedProduct);
+  @Override
+  public ProductResponseDto getProductById(Long id) {
 
+    Optional<Product> product = productRepository.findById(id);
+    if (product != null) {
+      return ProductMapper.toResponseDto(product.get());
+    } else {
+      throw new ProductNotFoundException("Product with id " + id + " does not exist");
     }
-
-    public List<Product> getAll(){
-        return productRepository.findAll();
-    }
-
-    @Override
-    public ProductResponseDto getProductById(Long id) {
-
-        Optional<Product> product = productRepository.findById(id);
-        if(product!=null){
-            return ProductMapper.toResponseDto(product.get());
-        }
-        else {
-            throw new ProductNotFoundException("Product with id "+ id + " does not exist");
-
-        }
-
-    }
-    }
+  }
+}

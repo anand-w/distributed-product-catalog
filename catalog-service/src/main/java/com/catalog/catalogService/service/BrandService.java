@@ -1,5 +1,3 @@
 package com.catalog.catalogService.service;
 
-
-public interface BrandService {
-}
+public interface BrandService {}

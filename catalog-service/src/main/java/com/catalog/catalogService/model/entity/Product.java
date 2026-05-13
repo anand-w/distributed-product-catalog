@@ -2,9 +2,8 @@ package com.catalog.catalogService.model.entity;
 
 import com.catalog.catalogService.model.enums.ProductStatus;
 import jakarta.persistence.*;
-import lombok.*;
-
 import java.math.BigDecimal;
+import lombok.*;
 
 @Entity
 @Table(name = "products")
@@ -15,28 +14,28 @@ import java.math.BigDecimal;
 @Builder
 public class Product {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+  @Id
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
+  private Long id;
 
-    @Column(nullable = false, unique = true)
-    private String sku;
+  @Column(nullable = false, unique = true)
+  private String sku;
 
-    @Column(nullable = false)
-    private String title;
+  @Column(nullable = false)
+  private String title;
 
-    private String description;
+  private String description;
 
-    private String category;
+  private String category;
 
-    private BigDecimal price;
+  private BigDecimal price;
 
-    private String currency;
+  private String currency;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "brand_id")
-    private Brand brand;
+  @ManyToOne(fetch = FetchType.LAZY)
+  @JoinColumn(name = "brand_id")
+  private Brand brand;
 
-    @Enumerated(EnumType.STRING)
-    private ProductStatus status;
+  @Enumerated(EnumType.STRING)
+  private ProductStatus status;
 }
