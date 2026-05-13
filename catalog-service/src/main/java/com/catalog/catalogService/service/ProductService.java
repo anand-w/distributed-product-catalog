@@ -1,22 +1,16 @@
 package com.catalog.catalogService.service;
 
+import com.catalog.catalogService.dto.request.ProductRequestDto;
+import com.catalog.catalogService.dto.response.ProductResponseDto;
 import com.catalog.catalogService.model.entity.Product;
-import com.catalog.catalogService.repository.ProductRepository;
-import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
 
 import java.util.List;
 
-@Service
-@RequiredArgsConstructor
-public class ProductService {
-    private final ProductRepository productRepository;
+public interface ProductService {
 
-    public Product save(Product product){
-        return productRepository.save(product);
-    }
+    public ProductResponseDto save(ProductRequestDto product);
 
-    public List<Product> getAll(){
-        return productRepository.findAll();
-    }
+    public List<Product> getAll();
+
+    public ProductResponseDto getProductById(Long id);
 }

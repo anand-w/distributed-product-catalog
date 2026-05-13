@@ -1,28 +1,22 @@
-package com.catalog.catalogService.model.entity;
+package com.catalog.catalogService.dto.response;
 
+import com.catalog.catalogService.model.entity.Brand;
 import com.catalog.catalogService.model.enums.ProductStatus;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.math.BigDecimal;
 
-@Entity
-@Table(name = "products")
-@Getter
-@Setter
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class Product {
+public class ProductResponseDto {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false, unique = true)
     private String sku;
 
-    @Column(nullable = false)
     private String title;
 
     private String description;
@@ -33,8 +27,6 @@ public class Product {
 
     private String currency;
 
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "brand_id")
     private Brand brand;
 
     @Enumerated(EnumType.STRING)
