@@ -28,7 +28,7 @@ public class ProductRequestDto {
   @NotBlank(message = "Product category is required")
   private String category;
 
-  @NotBlank(message = "Product price is required")
+  @NotNull(message = "Product price is required")
   private BigDecimal price;
 
   private String currency;

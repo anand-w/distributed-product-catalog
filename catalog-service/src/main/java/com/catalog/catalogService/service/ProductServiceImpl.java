@@ -2,6 +2,7 @@ package com.catalog.catalogService.service;
 
 import com.catalog.catalogService.dto.request.ProductRequestDto;
 import com.catalog.catalogService.dto.response.ProductResponseDto;
+import com.catalog.catalogService.exception.BrandNotFoundException;
 import com.catalog.catalogService.exception.ProductNotFoundException;
 import com.catalog.catalogService.mapper.ProductMapper;
 import com.catalog.catalogService.model.entity.Brand;
@@ -9,7 +10,6 @@ import com.catalog.catalogService.model.entity.Product;
 import com.catalog.catalogService.repository.BrandRepository;
 import com.catalog.catalogService.repository.ProductRepository;
 import java.util.List;
-import java.util.Optional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -25,10 +25,15 @@ public class ProductServiceImpl implements ProductService {
   @Override
   public ProductResponseDto save(ProductRequestDto productRequestDto) {
 
-    Optional<Brand> brand = Optional.of(new Brand());
-    brand = brandRepository.findById(productRequestDto.getBrandId());
+    Brand brand =
+        brandRepository
+            .findById(productRequestDto.getBrandId())
+            .orElseThrow(
+                () ->
+                    new BrandNotFoundException(
+                        "Brand with id " + productRequestDto.getBrandId() + " does not exist"));
 
-    Product product = ProductMapper.toEntity(productRequestDto, brand.get());
+    Product product = ProductMapper.toEntity(productRequestDto, brand);
     Product savedProduct = productRepository.save(product);
 
     return ProductMapper.toResponseDto(savedProduct);
@@ -42,11 +47,12 @@ public class ProductServiceImpl implements ProductService {
   @Override
   public ProductResponseDto getProductById(Long id) {
 
-    Optional<Product> product = productRepository.findById(id);
-    if (product != null) {
-      return ProductMapper.toResponseDto(product.get());
-    } else {
-      throw new ProductNotFoundException("Product with id " + id + " does not exist");
-    }
+    Product product =
+        productRepository
+            .findById(id)
+            .orElseThrow(
+                () -> new ProductNotFoundException("Product with id " + id + " does not exist"));
+
+    return ProductMapper.toResponseDto(product);
   }
 }
