@@ -28,13 +28,13 @@ public class ProductController {
   public ResponseEntity<ProductResponseDto> getProductById(@PathVariable Long productId) {
 
     ProductResponseDto responseDto = productService.getProductById(productId);
-    return ResponseEntity.status(HttpStatus.CREATED).body(responseDto);
+    return ResponseEntity.ok(responseDto);
   }
 
   @ResponseStatus(HttpStatus.CREATED)
   @PostMapping
   public ResponseEntity<ProductResponseDto> create(@RequestBody @Valid ProductRequestDto product) {
 
-    return ResponseEntity.ok().body(productService.save(product));
+    return ResponseEntity.status(HttpStatus.CREATED).body(productService.save(product));
   }
 }
