@@ -22,7 +22,7 @@ Current focus:
 
 Currently building:
 - `catalog-service`
-- PostgreSQL-backed REST APIs
+- MySQL-backed REST APIs
 - Dockerized local setup
 - DTO validation
 - global exception handling
@@ -86,7 +86,7 @@ Guidelines:
 # Database Guidelines
 
 Use:
-- PostgreSQL
+- MySQL
 - Hibernate-managed schema during early development
 - Flyway will be introduced in later phases
 
@@ -146,7 +146,7 @@ Current stack:
 - Java 17
 - Spring Boot
 - Maven
-- PostgreSQL
+- MySQL
 - Docker
 
 Planned future additions:

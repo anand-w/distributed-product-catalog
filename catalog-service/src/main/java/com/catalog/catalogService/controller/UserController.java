@@ -13,17 +13,14 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/register")
 public class UserController {
 
-    @Autowired
-    private UserDetailsRepository userDetailsRepository;
+  @Autowired private UserDetailsRepository userDetailsRepository;
 
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+  @Autowired private PasswordEncoder passwordEncoder;
 
-    @PostMapping
-    public String registerUser(@RequestBody Users user) {
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        userDetailsRepository.save(user);
-        return "User registered successfully";
-    }
+  @PostMapping
+  public String registerUser(@RequestBody Users user) {
+    user.setPassword(passwordEncoder.encode(user.getPassword()));
+    userDetailsRepository.save(user);
+    return "User registered successfully";
+  }
 }
-

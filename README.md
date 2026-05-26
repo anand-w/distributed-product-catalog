@@ -22,7 +22,7 @@ This project intentionally starts with a minimal architecture and evolves increm
 - Java 17
 - Spring Boot
 - Spring Data JPA
-- PostgreSQL
+- MySQL
 - Maven
 
 ## Infrastructure
@@ -50,7 +50,7 @@ distributed-product-catalog/
 │
 ├── infra/
 │   ├── docker-compose.yml
-│   └── postgres/
+│   └── mysql/
 │
 ├── docs/
 │
@@ -65,7 +65,7 @@ distributed-product-catalog/
 
 The initial phase focuses on building a strong backend foundation with:
 - product management APIs
-- PostgreSQL integration
+- MySQL integration
 - Dockerized local setup
 - clean service structure
 - bulk product ingestion support
@@ -117,7 +117,7 @@ docker compose -f infra/docker-compose.yml up -d
 ```
 
 This starts:
-- PostgreSQL
+- MySQL
 - supporting local infrastructure
 
 ---

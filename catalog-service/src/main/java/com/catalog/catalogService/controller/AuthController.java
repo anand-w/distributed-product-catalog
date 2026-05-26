@@ -14,18 +14,16 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/authenticate")
 public class AuthController {
 
-    @Autowired
-    private AuthenticationManager authenticationManager;
+  @Autowired private AuthenticationManager authenticationManager;
 
-    @Autowired
-    private JwtUtility jwtUtility;
+  @Autowired private JwtUtility jwtUtility;
 
-    @PostMapping
-    public String generateToken(@RequestBody AuthRequest request){
+  @PostMapping
+  public String generateToken(@RequestBody AuthRequest request) {
 
-        authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(request.getUserName(),request.getPassword()));
+    authenticationManager.authenticate(
+        new UsernamePasswordAuthenticationToken(request.getUserName(), request.getPassword()));
 
-        return jwtUtility.generateToken(request.getUserName());
-
-    }
+    return jwtUtility.generateToken(request.getUserName());
+  }
 }

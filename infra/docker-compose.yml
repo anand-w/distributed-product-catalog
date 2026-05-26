@@ -1,14 +1,21 @@
 version: '3.8'
 
 services:
-  postgres:
-    image: postgres:16
-    container_name: catalog-postgres
+  mysql:
+    image: mysql:8.4
+    container_name: catalog-mysql
 
     environment:
-      POSTGRES_DB: catalogdb
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      MYSQL_DATABASE: catalogdb
+      MYSQL_USER: catalog
+      MYSQL_PASSWORD: catalog
+      MYSQL_ROOT_PASSWORD: root
 
     ports:
-      - "5432:5432"
+      - "3306:3306"
+
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-proot"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
