@@ -4,9 +4,7 @@ import com.catalog.catalogService.dto.request.ProductRequestDto;
 import com.catalog.catalogService.dto.response.ProductResponseDto;
 import com.catalog.catalogService.model.entity.Brand;
 import com.catalog.catalogService.model.entity.Product;
-import lombok.Builder;
 
-@Builder
 public class ProductMapper {
 
   public static Product toEntity(ProductRequestDto productRequestDto, Brand brand) {
@@ -27,7 +25,7 @@ public class ProductMapper {
 
     return ProductResponseDto.builder()
         .id(product.getId())
-        .brand(product.getBrand())
+        .brand(BrandMapper.toResponseDto(product.getBrand()))
         .price(product.getPrice())
         .sku(product.getSku())
         .status(product.getStatus())

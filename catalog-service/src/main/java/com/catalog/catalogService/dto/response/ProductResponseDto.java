@@ -1,6 +1,5 @@
 package com.catalog.catalogService.dto.response;
 
-import com.catalog.catalogService.model.entity.Brand;
 import com.catalog.catalogService.model.enums.ProductStatus;
 import jakarta.persistence.*;
 import java.math.BigDecimal;
@@ -26,7 +25,7 @@ public class ProductResponseDto {
 
   private String currency;
 
-  private Brand brand;
+  private BrandResponseDto brand;
 
   @Enumerated(EnumType.STRING)
   private ProductStatus status;

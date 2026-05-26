@@ -9,9 +9,10 @@ import com.catalog.catalogService.model.entity.Brand;
 import com.catalog.catalogService.model.entity.Product;
 import com.catalog.catalogService.repository.BrandRepository;
 import com.catalog.catalogService.repository.ProductRepository;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -39,9 +40,9 @@ public class ProductServiceImpl implements ProductService {
     return ProductMapper.toResponseDto(savedProduct);
   }
 
-  public List<ProductResponseDto> getAll() {
-    List<Product> productsList = productRepository.findAll();
-    return productsList.stream().map(ProductMapper::toResponseDto).toList();
+  public Page<ProductResponseDto> getAll(Pageable pageable) {
+    Page<Product> productsList = productRepository.findAll(pageable);
+    return productsList.map(ProductMapper::toResponseDto);
   }
 
   @Override
