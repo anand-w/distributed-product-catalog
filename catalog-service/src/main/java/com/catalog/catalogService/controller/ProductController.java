@@ -1,5 +1,6 @@
 package com.catalog.catalogService.controller;
 
+import com.catalog.catalogService.dto.request.ProductFilterRequestDTO;
 import com.catalog.catalogService.dto.request.ProductRequestDto;
 import com.catalog.catalogService.dto.response.ProductResponseDto;
 import com.catalog.catalogService.service.ProductService;
@@ -20,9 +21,10 @@ public class ProductController {
   @Autowired private ProductService productService;
 
   @GetMapping
-  public ResponseEntity<Page<ProductResponseDto>> getAllProducts(Pageable pageable) {
+  public ResponseEntity<Page<ProductResponseDto>> getAllProducts(
+      Pageable pageable, ProductFilterRequestDTO productFilter) {
 
-    return ResponseEntity.ok(productService.getAll(pageable));
+    return ResponseEntity.ok(productService.getAll(productFilter, pageable));
   }
 
   @GetMapping("/id/{productId}")

@@ -1,5 +1,6 @@
 package com.catalog.catalogService.service;
 
+import com.catalog.catalogService.dto.request.ProductFilterRequestDTO;
 import com.catalog.catalogService.dto.request.ProductRequestDto;
 import com.catalog.catalogService.dto.response.ProductResponseDto;
 import com.catalog.catalogService.exception.BrandNotFoundException;
@@ -9,10 +10,12 @@ import com.catalog.catalogService.model.entity.Brand;
 import com.catalog.catalogService.model.entity.Product;
 import com.catalog.catalogService.repository.BrandRepository;
 import com.catalog.catalogService.repository.ProductRepository;
+import com.catalog.catalogService.repository.specification.ProductSpecification;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -40,8 +43,10 @@ public class ProductServiceImpl implements ProductService {
     return ProductMapper.toResponseDto(savedProduct);
   }
 
-  public Page<ProductResponseDto> getAll(Pageable pageable) {
-    Page<Product> productsList = productRepository.findAll(pageable);
+  public Page<ProductResponseDto> getAll(ProductFilterRequestDTO productFilter, Pageable pageable) {
+
+    Specification<Product> spec = ProductSpecification.filterProduct(productFilter);
+    Page<Product> productsList = productRepository.findAll(spec, pageable);
     return productsList.map(ProductMapper::toResponseDto);
   }
 
