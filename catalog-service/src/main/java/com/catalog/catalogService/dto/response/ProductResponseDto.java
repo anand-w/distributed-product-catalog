@@ -2,6 +2,7 @@ package com.catalog.catalogService.dto.response;
 
 import com.catalog.catalogService.model.enums.ProductStatus;
 import jakarta.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
 import lombok.*;
 
@@ -9,7 +10,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class ProductResponseDto {
+public class ProductResponseDto implements Serializable {
 
   private Long id;
 

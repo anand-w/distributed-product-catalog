@@ -13,6 +13,8 @@ import com.catalog.catalogService.repository.ProductRepository;
 import com.catalog.catalogService.repository.specification.ProductSpecification;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -27,6 +29,7 @@ public class ProductServiceImpl implements ProductService {
   @Autowired private BrandRepository brandRepository;
 
   @Override
+  @CacheEvict(value = "product", key = "#result.id", condition = "#result != null")
   public ProductResponseDto save(ProductRequestDto productRequestDto) {
 
     Brand brand =
@@ -51,6 +54,7 @@ public class ProductServiceImpl implements ProductService {
   }
 
   @Override
+  @Cacheable(value = "product", key = "#id")
   public ProductResponseDto getProductById(Long id) {
 
     Product product =
