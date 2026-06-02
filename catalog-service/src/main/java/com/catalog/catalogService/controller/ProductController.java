@@ -12,6 +12,9 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.IOException;
 
 @RestController
 @RequiredArgsConstructor
@@ -39,5 +42,11 @@ public class ProductController {
   public ResponseEntity<ProductResponseDto> create(@RequestBody @Valid ProductRequestDto product) {
 
     return ResponseEntity.status(HttpStatus.CREATED).body(productService.save(product));
+  }
+
+  @PostMapping("/upload/{productId}")
+  public String uploadImageByProductId(@PathVariable long productId, @RequestParam MultipartFile file) throws IOException {
+
+    return productService.uploadImageByProductId(productId,file);
   }
 }
