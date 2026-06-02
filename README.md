@@ -86,7 +86,7 @@ The architecture is intentionally simple to prioritize:
 - search indexing service
 - Redis caching
 - performance optimization
-- 
+  
 ## Phase 3
 - Kafka integration
 - asynchronous ingestion pipeline
