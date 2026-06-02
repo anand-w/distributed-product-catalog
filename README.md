@@ -83,14 +83,14 @@ The architecture is intentionally simple to prioritize:
 # Planned Evolution
 
 ## Phase 2
-- Kafka integration
-- asynchronous ingestion pipeline
-- event-driven communication
-
-## Phase 3
 - search indexing service
 - Redis caching
 - performance optimization
+- 
+## Phase 3
+- Kafka integration
+- asynchronous ingestion pipeline
+- event-driven communication
 
 ## Phase 4
 - observability stack
