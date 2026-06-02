@@ -83,8 +83,8 @@ The architecture is intentionally simple to prioritize:
 # Planned Evolution
 
 ## Phase 2
-- search indexing service DONE
-- Redis caching DONE
+- search indexing service - DONE
+- Redis caching - DONE
 - performance optimization
   
 ## Phase 3
