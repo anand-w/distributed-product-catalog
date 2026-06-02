@@ -84,7 +84,7 @@ The architecture is intentionally simple to prioritize:
 
 ## Phase 2
 - search indexing service DONE
-- Redis caching
+- Redis caching DONE
 - performance optimization
   
 ## Phase 3
