@@ -14,7 +14,6 @@ The goal of this project is to learn and implement real-world backend engineerin
 
 This project intentionally starts with a minimal architecture and evolves incrementally into a more distributed system over time.
 
-
 ---
 
 # Tech Stack
